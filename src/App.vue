@@ -1,10 +1,26 @@
 <template>
-  <div id="nav">
+ <!--  <div id="nav">
     <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </div>
+    <router-link to="/about">About</router-link> |
+    <router-link to="/contact">Contact</router-link>
+  </div> -->
+  <Header />
   <router-view/>
+  <Footer />
+
 </template>
+<script>
+import Header from './components/Header.vue'
+import Footer from './components/Footer.vue'
+import logoPic from './assets/images/palmtree.jpg'
+
+export default({
+  components:{
+    Header,
+    Footer
+  }
+})
+</script>
 
 <style>
 #app {
@@ -22,9 +38,13 @@
 #nav a {
   font-weight: bold;
   color: #2c3e50;
+  text-decoration:none;
+  padding:10px;
+  border-radius:2rem;
 }
 
 #nav a.router-link-exact-active {
   color: #42b983;
+  background-color:crimson;
 }
 </style>
