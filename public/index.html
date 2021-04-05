@@ -4,14 +4,80 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <style>
+      .loader-container{
+         background-image:linear-gradient(to bottom, lightpink, rgb(173 230 220));
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+  }
+      .loader {
+        
+        border-radius: 50%;
+        border-top: .5rem dotted pink;
+        border-right: .5rem dotted rgb(173 230 220);
+        border-bottom: .5rem dotted pink;
+        border-left: .5rem dotted rgb(173 230 220);
+        width: 3rem;
+        height: 3rem;
+        position:relative;
+        -webkit-animation: spin 4s linear infinite;
+        animation: spin 4s linear infinite;
+      
+      }
+      .loader>.inside-loader{
+        animation: spinInside 4s linear infinite;
+        background-image: linear-gradient(to bottom, pink, rgb(173 230 220));
+        border-radius:2rem;
+        
+        height:3rem;
+        width:3rem;
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      @-webkit-keyframes spin {
+        0% { -webkit-transform: rotate(0deg); }
+        100% { -webkit-transform: rotate(360deg); }
+      }
+
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes spinInside {
+        0% { visibility:visible; opacity:1; }
+        100% { visibility:hidden; opacity:0; }
+      }
+    </style>
     <link rel="icon" href="<%= BASE_URL %>favicon.ico">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@200&family=New+Tegomin&display=swap" rel="stylesheet"> 
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"
+      />  
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
     <noscript>
       <strong>We're sorry but <%= htmlWebpackPlugin.options.title %> doesn't work properly without JavaScript enabled. Please enable it to continue.</strong>
     </noscript>
-    <div id="app"></div>
+    <div id="app">
+      <div class="loader-container">
+        <div class="loader">
+          <span class="inside-loader"></span>
+        </div>
+      </div>
+
+
+    </div>
     <!-- built files will be auto injected -->
   </body>
 </html>
