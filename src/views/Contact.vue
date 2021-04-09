@@ -1,7 +1,10 @@
 <template>
-  <form>
+  <form @submit.prevent="contactSubmit">
     <label>Name: </label>
     <input v-model="name" type="name" required/>
+    <label>Username: </label>
+    <input v-model="username" type="username" required />
+    <div v-if="usernameError">{{ usernameError }}</div>
     <label>Email: </label>
     <input v-model="email" type="email" required/>
    
@@ -14,15 +17,18 @@
     <div class="item-container">
       <label>items:</label>
       
-      <input type="text" v-model="tempSkills" class="itemInput">
+      <input type="text" v-model="itemList" class="itemInput">
       <button  @click="addItem" class="btn itemBtn">Add</button>
-      <div v-for="item in items" :key="item">{{ item }}</div>
+      <div v-for="item in items" :key="item">
+        <span @click="deleteItem(item)">{{ item }}</span></div>
+      
     </div>
     <div class="acceptBtn">
       <input type="checkbox" v-model="acceptBtn" required>
       <label>accept</label>
 
     </div>
+    <button class="btn submit-btn">submit</button>
   </form>
 
 
@@ -35,20 +41,42 @@ export default({
     data(){
       return{
         name:'',
+        username:'',
         email:'',
         course:'',
         acceptBtn: false,
-        tempSkills:'',
-        items:[]
+        itemList:'',
+        items:[],
+        usernameError:''
+        
       }
     },
     methods:{
       addItem(item){
-        if(this.tempSkills){
-          this.items.push(this.tempSkills)
-          this.tempSkills = ''
+        if(this.itemList){
+          if(!this.items.includes(this.itemList)){
+            this.items.push(this.itemList)
+
+          }
+          
+          this.itemList= ''
         }
+      },
+      deleteItem(item){
+          this.items = this.items.filter((yourItem) => {
+            return item !== yourItem
+          })
+      },
+      contactSubmit(){
+        this.usernameError = this.usernameError.length > 5 ? '' : 'name must be longer'
+     
+      if(!this.usernameError){
+        console.log('name: ' , this.name);
+        console.log('username: ', this.username);
+        console.log('items: ', this.items);
       }
+     
+     }
     }
 
 })
@@ -108,6 +136,9 @@ export default({
     width:25%;
     padding: .2rem;
     text-align:center;
+  }
+  .acceptBtn{
+    margin-bottom:1rem;
   }
   
 
